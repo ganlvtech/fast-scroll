@@ -1,19 +1,38 @@
-RButton & WheelUp::
-    Flag = true
-    Send, {Blind}{WheelUp}{WheelUp}{WheelUp}{WheelUp}{WheelUp}{WheelUp}{WheelUp}{WheelUp}{WheelUp}{WheelUp}
-Return
+#Requires AutoHotkey v2.0
+
+GroupAdd("exclude_window", "ahk_class UnityContainerWndClass")
+GroupAdd("exclude_window", "ahk_class GHOST_WindowClass")
+GroupAdd("exclude_window", "ahk_class Photoshop")
+GroupAdd("exclude_window", "ahk_class UnrealWindow")
+#HotIf !WinActive("ahk_group exclude_window")
+
+Scrolled := False
 
 RButton & WheelDown::
-    Flag = true
-    Send, {Blind}{WheelDown}{WheelDown}{WheelDown}{WheelDown}{WheelDown}{WheelDown}{WheelDown}{WheelDown}{WheelDown}{WheelDown}
-Return
+{
+    global Scrolled
+    Scrolled := True
+    Send("{Blind}{WheelDown}{WheelDown}{WheelDown}{WheelDown}{WheelDown}{WheelDown}{WheelDown}{WheelDown}{WheelDown}{WheelDown}")
+}
+
+RButton & WheelUp::
+{
+    global Scrolled
+    Scrolled := True
+    Send("{Blind}{WheelUp}{WheelUp}{WheelUp}{WheelUp}{WheelUp}{WheelUp}{WheelUp}{WheelUp}{WheelUp}{WheelUp}")
+}
 
 RButton::
-    Flag = false
-Return
+{
+    global Scrolled
+    Scrolled := False
+}
 
 $*RButton up::
-    If ! %Flag%
-        Send, {Blind}{RButton}
-    Return
-Return
+{
+    global Scrolled
+    If (!Scrolled)
+    {
+        Send("{Blind}{RButton}")
+    }
+}
