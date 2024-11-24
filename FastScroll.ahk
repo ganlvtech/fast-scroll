@@ -1,6 +1,7 @@
 #Requires AutoHotkey v2.0
 
 GroupAdd("exclude_window", "ahk_class UnityContainerWndClass")
+GroupAdd("exclude_window", "ahk_class UnityWndClass")
 GroupAdd("exclude_window", "ahk_class GHOST_WindowClass")
 GroupAdd("exclude_window", "ahk_class Photoshop")
 GroupAdd("exclude_window", "ahk_class UnrealWindow")
